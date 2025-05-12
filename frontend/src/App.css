@@ -1,0 +1,287 @@
+/* New Color Palette */
+:root {
+  --primary-red: #dc323f;
+  --off-white: #f8f8f6;
+  --black: #0b0c0e;
+  --gray: #636363;
+  --dark-gray: #222222;
+}
+
+/* Global Styles */
+html,
+body {
+  font-family: 'Amazon Ember';
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  background-color: var(--off-white);
+  color: var(--black);
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar-track {
+  background-color: var(--off-white);
+}
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: var(--off-white);
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(99, 99, 99, 0.2);
+  border: 0px;
+  background-clip: padding-box;
+  border-radius: 5px;
+}
+
+/* Navbar */
+nav {
+  background-color: var(--dark-gray);
+  padding: 1rem 1rem;
+}
+
+/* Buttons and Inputs */
+#search_btn,
+#login_btn,
+#view_btn,
+#cart_count,
+#cart_btn,
+#review_btn,
+#checkout_btn,
+.review-btn,
+#view_order_details,
+#edit_profile,
+.update-btn,
+.page-item.active .page-link {
+  background-color: var(--primary-red);
+  color: white;
+  border-color: var(--primary-red);
+}
+
+.input-group {
+  width: 90%;
+  margin-right: 35%;
+}
+
+#search_field {
+  height: 2.4rem;
+  padding: 1rem;
+}
+
+#login_btn,
+#view_btn {
+  padding: 0.4rem 1.8rem;
+  font-family: calibri;
+}
+
+/* Cart Icon */
+#cart {
+  font-size: 1rem;
+  color: var(--off-white);
+}
+
+/* Homepage Cards */
+.card-title a {
+  color: var(--dark-gray);
+}
+.card-title a:hover {
+  color: var(--primary-red);
+  text-decoration: none;
+}
+.card-body {
+  padding-left: 0;
+}
+.card-text {
+  font-size: 1.4rem;
+}
+.card-img-top {
+  width: 200px;
+  height: 150px;
+}
+
+/* Ratings */
+.ratings,
+.rating-outer,
+.rating-inner::before {
+  color: #fdcc0d;
+}
+
+/* Footer */
+footer {
+  margin-top: 8rem;
+  color: var(--gray);
+}
+
+/* Product Details */
+#product_id,
+#product_seller,
+.review_user,
+#no_of_reviews {
+  color: var(--gray);
+}
+#product_price {
+  font-size: 2rem;
+  font-weight: bold;
+}
+#stock_status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 0.3rem;
+}
+.redColor {
+  color: var(--primary-red);
+}
+.greenColor {
+  color: green;
+}
+#product_image {
+  margin-top: 9rem;
+}
+
+/* Loader */
+.loader:after {
+  border: 6px solid var(--primary-red);
+  border-color: var(--primary-red) transparent;
+}
+
+/* Cart Item */
+.cart-item a {
+  color: var(--gray);
+}
+#delete_cart_item {
+  color: var(--primary-red);
+  background: white;
+}
+#card_item_price {
+  color: var(--primary-red);
+}
+
+/* Forms */
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: white;
+}
+.wrapper form .btn {
+  background-color: var(--primary-red);
+  border-color: var(--primary-red);
+  color: white;
+}
+
+/* Avatars */
+.avatar,
+.avatar img,
+.rounded-circle,
+.avatar-nav {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Checkout Steps */
+.incomplete {
+  background: #eeeeee;
+}
+.active-step {
+  background: var(--primary-red);
+  color: white;
+}
+.triangle-active {
+  border-left: 15px solid var(--primary-red);
+}
+.triangle2-active {
+  border-top: 20px solid var(--primary-red);
+}
+.triangle-incomplete {
+  border-left: 15px solid #eeeeee;
+}
+.triangle2-incomplete {
+  border-top: 20px solid #eeeeee;
+}
+
+/* Pagination */
+.page-link {
+  color: var(--primary-red);
+}
+.page-link:hover {
+  color: var(--primary-red);
+}
+
+/* Sidebar */
+#sidebar,
+#sidebar .sidebar-header,
+ul ul a {
+  background: var(--dark-gray);
+  color: white;
+}
+#sidebar ul li a:hover {
+  background: white;
+  color: var(--dark-gray);
+}
+#sidebar ul li.active > a {
+  background: var(--dark-gray);
+}
+
+/* Other Elements */
+.user-info h4 {
+  font-weight: 800;
+  color: var(--gray);
+}
+.orange {
+  color: var(--primary-red);
+}
+
+/* Card Button Styling */
+.card .btn {
+  background-color: var(--primary-red);
+  color: white;
+  border: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.card .btn:hover {
+  background-color: #b72933;
+  color: white;
+}
+
+/* Image Styling */
+.card-img-top {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+}
+
+/* Responsive Card Text */
+.card-text {
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .card-text {
+    font-size: 1.1rem;
+  }
+}
+
+.category-tile {
+  height: 200px;
+}
+.category-tile img {
+  object-fit: cover;
+  height: 100%;
+}
+
+body {
+  background: #f4f6f9;
+}
+
+.card {
+  background: #fff;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}

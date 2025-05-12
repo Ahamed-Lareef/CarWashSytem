@@ -1,0 +1,66 @@
+[
+    {
+      "name": "Foam Wash",
+      "category": "Exterior Wash",
+      "description": "High-pressure foam wash with hand drying",
+      "price": 1200,
+      "isAddOn": false,
+      "estimatedDuration": "30 mins",
+      "image": "/images/services/basicWash.jpg"
+    },
+    {
+      "name": "Vacuum & Wipe",
+      "category": "Interior Cleaning",
+      "description": "Vacuum carpets and wipe all surfaces",
+      "price": 1000,
+      "isAddOn": false,
+      "estimatedDuration": "30 mins",
+      "image": "/images/services/deepCleaning.jpg"
+    },
+    {
+      "name": "Premium Full Service",
+      "category": "Full Service",
+      "description": "Full exterior + full interior clean",
+      "price": 3500,
+      "isAddOn": false,
+      "estimatedDuration": "60 mins",
+      "image": "/images/services/premiumWash.jpg"
+    },
+    {
+      "name": "Ceramic Coating (3-mo)",
+      "category": "Premium Packages",
+      "description": "Long-lasting paint protection",
+      "price": 9500,
+      "isAddOn": false,
+      "estimatedDuration": "90 mins",
+      "image": "/images/services/exterior.jpg"
+    },
+    {
+      "name": "Waterless Wash",
+      "category": "Eco-Friendly",
+      "description": "Uses eco-safe spray to clean the car",
+      "price": 2500,
+      "isAddOn": false,
+      "estimatedDuration": "30 mins",
+      "image": "/images/services/ecoWash.jpg"
+    },
+    {
+      "name": "Engine Bay Cleaning",
+      "category": "Engine Care",
+      "description": "Safe degreasing and wipe-down",
+      "price": 1800,
+      "isAddOn": false,
+      "estimatedDuration": "30 mins",
+      "image": "/images/services/engineBayCleaning.jpg"
+    },
+    {
+      "name": "Tire Shine",
+      "category": "Add-on",
+      "description": "Make tires look brand new",
+      "price": 600,
+      "isAddOn": true,
+      "estimatedDuration": "10 mins",
+      "image": "/images/services/full.jpeg"
+    }
+  ]
+  
