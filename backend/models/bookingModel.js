@@ -16,6 +16,7 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please Enter Customer Email Address"],
         trim: true,
+        match: [/.+\@.+\..+/, "Please enter a valid email"]
     },
     contact: {
         type: String,
@@ -77,7 +78,7 @@ const bookingSchema = new mongoose.Schema({
     },
     bookServices: [{
         name: {
-            type:String,
+            type: String,
             required: true
         },
         price: {
@@ -89,30 +90,29 @@ const bookingSchema = new mongoose.Schema({
             required: true,
             ref: 'Service'
         }
-    }]
-    ,
+    }],
     amount: {
         type: Number,
         required: true,
         default: 0.0
     },
+    paymentInfo: {
+        id: { type: String },
+        status: { type: String }
+    },
     paidAt: {
         type: Date
     },
-    completedAt : {
+    completedAt: {
         type: Date
     },
     bookingStatus: {
         type: String,
-        enum: ['Pending', 'On going','Completed'],
+        enum: ['Pending', 'On going', 'Completed'],
         default: 'Pending'
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
-})
+}, { timestamps: true });
 
-let schema = mongoose.model('Booking', bookingSchema)
+const Booking = mongoose.model('Booking', bookingSchema);
 
-module.exports = schema
+module.exports = Booking;

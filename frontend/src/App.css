@@ -285,3 +285,64 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
+.checkout-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* spacing between steps */
+}
+
+.step {
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 0.375rem;
+}
+
+.active-step {
+  background-color: #dc323f; /* red */
+  color: white;
+  border-color: #dc323f;
+}
+
+.incomplete {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #dc323f; /* red text */
+  border-color: #e5e7eb; /* gray-200 border */
+}
+
+/* Triangle Right */
+.triangle-active,
+.triangle-incomplete {
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.triangle-active {
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent #dc323f;
+}
+
+.triangle-incomplete {
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent #e5e7eb;
+}
+
+/* Triangle Left */
+.triangle2-active,
+.triangle2-incomplete {
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.triangle2-active {
+  border-width: 10px 15px 10px 0;
+  border-color: transparent #dc323f transparent transparent;
+}
+
+.triangle2-incomplete {
+  border-width: 10px 15px 10px 0;
+  border-color: transparent #e5e7eb transparent transparent;
+}
