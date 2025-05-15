@@ -36,6 +36,21 @@ exports.getServices = async (req, res, next) => {
 
 // Create a new service - /api/v1/service/new
 exports.newService = catchAsyncError(async (req, res, next) => {
+    let imageUrl = "";
+    let BASE_URL = process.env.BACKEND_URL;
+
+    if (process.env.NODE_ENV === "production") {
+        BASE_URL = `${req.protocol}://${req.get('host')}`;
+    }
+
+    // If one image is uploaded
+    if (req.file) {
+        imageUrl = `${process.env.BACKEND_URL}/uploads/service/${req.file.originalname}`;
+        req.body.image = imageUrl; // Assuming your model has a field called `image`
+    }
+
+    req.body.user = req.user.id;
+
     const service = await Service.create(req.body);
 
     res.status(201).json({
@@ -43,6 +58,7 @@ exports.newService = catchAsyncError(async (req, res, next) => {
         service
     });
 });
+
 
 // Get a single service by ID - /api/v1/service/:id
 exports.getSingleService = catchAsyncError(async (req, res, next) => {
@@ -100,4 +116,13 @@ exports.deleteService = catchAsyncError(async (req, res, next) => {
         success: true,
         message: "Service deleted!" // Success message after deletion
     });
+});
+
+// get admin services  - api/v1/admin/services
+exports.getAdminServices = catchAsyncError(async (req, res, next) =>{
+    const services = await Service.find();
+    res.status(200).send({
+        success: true,
+        services
+    })
 });

@@ -5,29 +5,31 @@ import {
     bookingFail,
     userBookingsRequest,
     userBookingsSuccess,
-    userBookingsFail
+    userBookingsFail,
+    createBookingRequest,
+    createBookingSuccess,
+    createBookingFail
 } from '../slices/bookingSlice';
 
 // Create a new booking
 export const createBooking = (bookingData) => async (dispatch) => {
     try {
-        dispatch(bookingRequest());
+        dispatch(createBookingRequest());
         const { data } = await axios.post('/api/v1/booking/new', bookingData);
 
-        dispatch(bookingSuccess(data));
+        dispatch(createBookingSuccess(data));
     } catch (error) {
-        dispatch(bookingFail(error.response?.data?.message || error.message));
+        dispatch(createBookingFail(error.response?.data?.message || error.message));
     }
 };
 
 
-export const userBookings = (bookingData) => async (dispatch) => {
+export const userBookings = () => async (dispatch) => {
     try {
         dispatch(userBookingsRequest());
-
-        const { data } = await axios.post('/api/v1/myorders', bookingData);
-
-        dispatch(userBookingsSuccess(data));
+        const { data } = await axios.get('/api/v1/mybookings');
+        // data = { success: true, bookings: [...] }
+        dispatch(userBookingsSuccess(data.bookings));  // <-- dispatch bookings array only
     } catch (error) {
         dispatch(userBookingsFail(error.response?.data?.message || error.message));
     }

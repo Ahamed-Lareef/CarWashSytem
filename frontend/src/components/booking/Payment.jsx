@@ -6,11 +6,17 @@ import {
   CardCvcElement,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createBooking } from "../../actions/bookingActions";
+import { saveBookingInfo } from "../../slices/bookingSlice";
+import CheckoutSteps from "./CheckoutSteps";
+
+const toISO = (val) => {
+  const date = new Date(val);
+  return !isNaN(date) ? date.toISOString() : null;
+};
 
 export default function Payment() {
   const stripe = useStripe();
@@ -36,18 +42,21 @@ export default function Payment() {
     },
   };
 
-  const book = {
-    selectedService,
-    bookingInfo,
-    price: bookInfo.price,
-  };
-
   const submitHandler = async (e) => {
     e.preventDefault();
-    document.querySelector("#pay_btn").disabled = true;
+
+    const payBtn = document.querySelector("#pay_btn");
+    payBtn.disabled = true;
+
+    if (!stripe || !elements) {
+      toast("Stripe is not loaded yet.", { type: "error", position: "top-center" });
+      payBtn.disabled = false;
+      return;
+    }
 
     try {
       const { data } = await axios.post("/api/v1/payment/process", paymentData);
+
       const clientSecret = data.client_secret;
 
       const result = await stripe.confirmCardPayment(clientSecret, {
@@ -65,79 +74,113 @@ export default function Payment() {
           type: "error",
           position: "top-center",
         });
-        document.querySelector("#pay_btn").disabled = false;
-      } else {
-        if (result.paymentIntent.status === "succeeded") {
-          toast("Payment Success!", {
-            type: "success",
-            position: "top-center",
-          });
+        payBtn.disabled = false;
+      } else if (result.paymentIntent.status === "succeeded") {
+        toast("Payment Success!", {
+          type: "success",
+          position: "top-center",
+        });
 
-          // Attach payment info to booking and dispatch
-          dispatch(
-            createBooking({
-              ...book,
-              paymentInfo: {
-                id: result.paymentIntent.id,
-                status: result.paymentIntent.status,
-              },
-            })
-          );
-
-          navigate("/booking/success");
-        } else {
-          toast("Please try again!", {
-            type: "warning",
-            position: "top-center",
-          });
+        if (user && user._id) {
+          localStorage.setItem("userId", user._id);
+          sessionStorage.setItem("userId", user._id);
         }
+
+        const finalBooking = {
+          name: user.name,
+          email: user.email,
+          contact: bookingInfo.phone,
+          address: bookingInfo.address,
+          location: bookingInfo.city,
+          station: selectedService.name,
+          serviceMode: selectedService.category,
+          vehicleInfo: bookingInfo.vehicle,
+          appointmentDate: toISO(bookingInfo.date),
+          time: bookingInfo.time,
+          bookServices: [
+            {
+              name: selectedService.name,
+              price: bookInfo.price,
+              service: selectedService._id || null,
+            },
+          ],
+          amount: bookInfo.price,
+          paymentInfo: {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          },
+          paidAt: toISO(Date.now()),
+        };
+
+        dispatch(saveBookingInfo(finalBooking));
+        dispatch(createBooking(finalBooking));
+        localStorage.setItem("lastBooking", JSON.stringify(finalBooking));
+        sessionStorage.setItem("bookingConfirmation", JSON.stringify(finalBooking));
+
+        navigate("/booking/success");
+      } else {
+        toast("Payment could not be processed. Please try again.", {
+          type: "warning",
+          position: "top-center",
+        });
+        payBtn.disabled = false;
       }
     } catch (error) {
-      toast("Payment failed. Try again.", {
+      console.error("Payment error:", error);
+      toast("Payment failed. Please try again.", {
         type: "error",
         position: "top-center",
       });
-      document.querySelector("#pay_btn").disabled = false;
+      payBtn.disabled = false;
     }
   };
 
   return (
-    <div className="row wrapper">
-      <div className="col-10 col-lg-5">
-        <form onSubmit={submitHandler} className="shadow-lg">
-          <h1 className="mb-4">Card Info</h1>
+    <div className="container py-4">
+      {/* Add padding here */}
+      <CheckoutSteps activeStep={3} />
 
-          <div className="form-group">
-            <label htmlFor="card_num_field">Card Number</label>
-            <CardNumberElement
-              type="text"
-              id="card_num_field"
-              className="form-control"
-            />
-          </div>
+      <div className="row wrapper mt-4">
+        <div className="col-10 col-lg-5 mx-auto">
+          <form onSubmit={submitHandler} className="shadow-lg p-4 rounded">
+            <h1 className="mb-4">Card Info</h1>
 
-          <div className="form-group">
-            <label htmlFor="card_exp_field">Card Expiry</label>
-            <CardExpiryElement
-              type="text"
-              id="card_exp_field"
-              className="form-control"
-            />
-          </div>
+            <div className="form-group mb-3">
+              <label htmlFor="card_num_field">Card Number</label>
+              <CardNumberElement
+                id="card_num_field"
+                className="form-control"
+                options={{ style: { base: { fontSize: "16px" } } }}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="card_cvc_field">Card CVC</label>
-            <CardCvcElement
-              type="text"
-              id="card_cvc_field"
-              className="form-control"
-            />
-          </div>
+            <div className="form-group mb-3">
+              <label htmlFor="card_exp_field">Card Expiry</label>
+              <CardExpiryElement
+                id="card_exp_field"
+                className="form-control"
+                options={{ style: { base: { fontSize: "16px" } } }}
+              />
+            </div>
 
-          <button id="pay_btn" type="submit" className="btn btn-block py-3">
-            Pay - LKR {bookInfo?.price}
-          </button>
-        </form>
+            <div className="form-group mb-4">
+              <label htmlFor="card_cvc_field">Card CVC</label>
+              <CardCvcElement
+                id="card_cvc_field"
+                className="form-control"
+                options={{ style: { base: { fontSize: "16px" } } }}
+              />
+            </div>
+
+            <button
+              id="pay_btn"
+              type="submit"
+              className="btn btn-primary btn-block py-3"
+            >
+              Pay - LKR {bookInfo?.price}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

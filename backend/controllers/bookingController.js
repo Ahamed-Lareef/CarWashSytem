@@ -8,42 +8,49 @@ const APIFeatures = require('../utils/apiFeatures');
 //create booking - /api/v1/booking/new
 exports.newBooking = catchAsyncError(async (req, res, next) => {
     const {
-        name,
-        email,
-        contact,
-        address,
-        location,
-        station,
-        serviceMode,
-        vehicleInfo,
-        appointmentDate,
-        time,
-        bookServices,
-        amount,
-    } = req.body;
+  name,
+  email,
+  contact,
+  address,
+  location,
+  station,
+  serviceMode,
+  vehicleInfo,
+  appointmentDate,
+  time,
+  bookServices,
+  amount,
+  paymentInfo,
+  notes,
+  paidAt
+} = req.body;
 
-    const booking = await Booking.create({
-        user: req.user.id,
-        name,
-        email,
-        contact,
-        address,
-        location,
-        station,
-        serviceMode,
-        vehicleInfo,
-        appointmentDate,
-        time,
-        bookServices,
-        amount,
-        paidAt: Date.now(),
-    });
+const booking = await Booking.create({
+  user: req.user.id,
+  name,
+  email,
+  contact,
+  address,
+  location,
+  station,
+  serviceMode,
+  vehicleInfo,
+  appointmentDate: new Date(appointmentDate), // ensure date format
+  time,
+  bookServices,
+  amount,
+  paymentInfo,
+  notes,
+  paidAt: paymentInfo?.status === 'succeeded' ? new Date(paidAt) : undefined
+});
 
-    res.status(200).json({
+
+    res.status(201).json({
         success: true,
         booking
     });
 });
+
 
 //Admin: Get all bookings - api/v1/bookings
 exports.bookings = catchAsyncError(async (req, res, next) => {

@@ -113,6 +113,7 @@ const bookingSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
+// Create a model from the schema
 const Booking = mongoose.model('Booking', bookingSchema);
 
 module.exports = Booking;

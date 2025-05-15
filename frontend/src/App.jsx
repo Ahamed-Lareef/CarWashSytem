@@ -27,6 +27,9 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import BookingSuccess from './components/booking/BookingSuccess';
 import UserBookings from './components/userBooking/UserBookings';
+import Dashboard from './components/admin/Dashboard';
+import ServiceList from './components/admin/ServiceList';
+import NewService from './components/admin/NewService';
 
 
 
@@ -61,13 +64,18 @@ function App() {
                 <Route path='/booking' element={<ProtectedRoute><Booking /></ProtectedRoute>}/>
                 <Route path='/booking/confirm' element={<ProtectedRoute><ConfirmBooking /></ProtectedRoute>}/>
                 <Route path='/booking/success' element={<ProtectedRoute><BookingSuccess /></ProtectedRoute>}/>
-                <Route path='/bookings' element={<ProtectedRoute><UserBookings /></ProtectedRoute>}/>
+                <Route path='/bookings' element={<UserBookings />}/>
                 {stripeApiKey &&
                 <Route path='/payment' element={<ProtectedRoute><Elements stripe={loadStripe(stripeApiKey)}><Payment /></Elements></ProtectedRoute>}/>
                 }
               </Routes>
           </div>
-          
+          <Routes>
+                  <Route path='/admin/dashboard' element={ <ProtectedRoute isAdmin={true}><Dashboard/></ProtectedRoute> } />
+                  <Route path='/admin/services' element={ <ProtectedRoute isAdmin={true}><ServiceList/></ProtectedRoute> } />
+                  <Route path='/admin/services/create' element={ <ProtectedRoute isAdmin={true}><NewService/></ProtectedRoute> } />
+                  
+                </Routes>
           <Footer />
         </div>
       </Router>

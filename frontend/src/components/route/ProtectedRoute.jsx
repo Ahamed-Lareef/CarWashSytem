@@ -13,6 +13,8 @@ export default function ProtectedRoute ({children, isAdmin}) {
         if(isAdmin === true  && user.role !== 'admin') {
             return <Navigate to="/" />
         }
+
+        
         return children;
     }
 

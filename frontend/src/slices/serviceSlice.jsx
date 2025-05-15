@@ -1,35 +1,55 @@
-import {createSlice} from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const serviceSlice = createSlice({
-    name : 'service',
-    initialState: {
-        loading: false,
-        service: {}
+  name: 'service',
+  initialState: {
+    loading: false,
+    service: {},
+    isServiceCreated: false,
+    error: null
+  },
+  reducers: {
+    serviceRequest(state) {
+      state.loading = true;
     },
-    reducers: {
-        serviceRequest(state, action){
-            return{
-                loading: true
-            }
-        },
-        serviceSuccess(state, action){
-            return{
-                loading: false,
-                service: action.payload.service
-            }
-        },
-        serviceFail(state, action){
-            return{
-                loading: false,
-                error: action.payload
-            }
-        }
+    serviceSuccess(state, action) {
+      state.loading = false;
+      state.service = action.payload.service;
+      state.error = null;
+    },
+    serviceFail(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    newServiceRequest(state) {
+      state.loading = true;
+      state.isServiceCreated = false;
+    },
+    newServiceSuccess(state, action) {
+      state.loading = false;
+      state.service = action.payload.service;
+      state.isServiceCreated = true;
+      state.error = null;
+    },
+    newServiceFail(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+      state.isServiceCreated = false; // should be false, not true
+    },
+    clearServiceCreated(state) {
+      state.isServiceCreated = false;
     }
+  }
 });
 
-const { actions, reducer } = serviceSlice;
+export const {
+  serviceRequest,
+  serviceSuccess,
+  serviceFail,
+  newServiceRequest,
+  newServiceSuccess,
+  newServiceFail,
+  clearServiceCreated
+} = serviceSlice.actions;
 
-export const { serviceRequest, serviceSuccess, serviceFail } = actions;
-
-export default reducer;
-
+export default serviceSlice.reducer;

@@ -55,50 +55,7 @@ export default function Home () {
                         linkClass={'page-link'}
                     />
                 </div> : null}
-                <section id="service-categories" className="container my-5">
-                <h2 className="text-center mb-4">Explore by Category</h2>
-                <div className="row g-4">
-
-                    <div className="col-12 col-md-6 col-lg-3">
-                    <div className="position-relative overflow-hidden rounded shadow-sm category-tile">
-                        <img src="/images/services/basicWash.jpg" alt="Exterior Wash" className="img-fluid w-100 h-100 object-fit-cover" />
-                        <div className="position-absolute top-0 start-0 w-100 text-center text-white bg-dark bg-opacity-50 p-3">
-                        <h5 className="m-0">Exterior Wash</h5>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div className="col-12 col-md-6 col-lg-3">
-                    <div className="position-relative overflow-hidden rounded shadow-sm category-tile">
-                        <img src="/images/services/basicWash.jpg" alt="Interior Cleaning" className="img-fluid w-100 h-100 object-fit-cover" />
-                        <div className="position-absolute top-0 start-0 w-100 text-center text-white bg-dark bg-opacity-50 p-3">
-                        <h5 className="m-0">Interior Cleaning</h5>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div className="col-12 col-md-6 col-lg-3">
-                    <div className="position-relative overflow-hidden rounded shadow-sm category-tile">
-                        <img src="/images/services/basicWash.jpg" alt="Full Service" className="img-fluid w-100 h-100 object-fit-cover" />
-                        <div className="position-absolute top-0 start-0 w-100 text-center text-white bg-dark bg-opacity-50 p-3">
-                        <h5 className="m-0">Full Service</h5>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div className="col-12 col-md-6 col-lg-3">
-                    <div className="position-relative overflow-hidden rounded shadow-sm category-tile">
-                        <img src="/images/services/basicWash.jpg" alt="Eco-Friendly" className="img-fluid w-100 h-100 object-fit-cover" />
-                        <div className="position-absolute top-0 start-0 w-100 text-center text-white bg-dark bg-opacity-50 p-3">
-                        <h5 className="m-0">Eco-Friendly</h5>
-                        </div>
-                    </div>
-                    </div>
-
-                </div>
-                </section>
-
-
+                
 
 
 
@@ -108,7 +65,7 @@ export default function Home () {
 
                     <div className="col-md-6 col-lg-4 mb-4">
                     <div className="card h-100 shadow-sm">
-                        <img src="/images/carwash/basicWash.jpg" className="card-img-top" alt="Deep Cleaning & Waxing"></img>
+                        <img src="./images/services/deepCleaning.jpg" className="card-img-top" alt="Deep Cleaning & Waxing"></img>
                         <div className="card-body">
                         <h5 className="card-title">Deep Cleaning & Waxing</h5>
                         <p className="card-text">Full body deep clean and protective wax layer. Ideal for monthly deep care.</p>
@@ -120,7 +77,7 @@ export default function Home () {
 
                     <div className="col-md-6 col-lg-4 mb-4">
                     <div className="card h-100 shadow-sm">
-                        <img src="/images/carwash/basicWash.jpg" className="card-img-top" alt="Premium Full Service"></img>
+                        <img src="/images/services/premiumWash.jpg" className="card-img-top" alt="Premium Full Service"></img>
                         <div className="card-body">
                         <h5 className="card-title">Premium Full Service</h5>
                         <p className="card-text">Our best-selling full package — interior & exterior perfection.</p>
@@ -132,7 +89,7 @@ export default function Home () {
 
                     <div className="col-md-6 col-lg-4 mb-4">
                     <div className="card h-100 shadow-sm">
-                        <img src="/images/carwash/basicWash.jpg" className="card-img-top" alt="Waterless Wash"></img>
+                        <img src="/images/services/ecoWash.jpg" className="card-img-top" alt="Waterless Wash"></img>
                         <div className="card-body">
                         <h5 className="card-title">Waterless Wash</h5>
                         <p className="card-text">Eco-friendly cleaning with no water waste — perfect for conscious drivers.</p>
