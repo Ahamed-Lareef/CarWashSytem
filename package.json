@@ -2,6 +2,14 @@
   "name": "carwash",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/Ahamed-Lareef/CarWashSytem#readme",
+  "bugs": {
+    "url": "https://github.com/Ahamed-Lareef/CarWashSytem/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahamed-Lareef/CarWashSytem.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "commonjs",
